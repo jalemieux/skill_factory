@@ -54,20 +54,53 @@ echo "Key is valid."
 export FRED_API_KEY="$key"
 echo "Exported FRED_API_KEY for current session."
 
-# Persist to shell config
-if [[ -n "$SHELL_RC" ]]; then
-  read -rp "Add to $SHELL_RC for future sessions? [Y/n] " persist
-  persist="${persist:-Y}"
-  if [[ "$persist" =~ ^[Yy] ]]; then
-    echo "" >> "$SHELL_RC"
-    echo "# FRED API key (macro-econ-data skill)" >> "$SHELL_RC"
-    echo "export FRED_API_KEY=\"$key\"" >> "$SHELL_RC"
-    echo "Added to $SHELL_RC. Run 'source $SHELL_RC' or open a new terminal."
-  fi
-else
-  echo "Could not detect shell config file. Add this to your shell profile manually:"
-  echo "  export FRED_API_KEY=\"$key\""
-fi
+# Persist the key
+echo ""
+echo "Where should the key be saved?"
+echo "  1) Shell config ($SHELL_RC)"
+echo "  2) .env file in current project ($(pwd)/.env)"
+echo "  3) Custom file path"
+echo "  4) Don't save (current session only)"
+echo ""
+read -rp "Choose [1-4]: " choice
+choice="${choice:-1}"
+
+case "$choice" in
+  1)
+    if [[ -n "$SHELL_RC" ]]; then
+      echo "" >> "$SHELL_RC"
+      echo "# FRED API key (macro-econ-data skill)" >> "$SHELL_RC"
+      echo "export FRED_API_KEY=\"$key\"" >> "$SHELL_RC"
+      echo "Added to $SHELL_RC. Run 'source $SHELL_RC' or open a new terminal."
+    else
+      echo "Could not detect shell config file. Add manually:"
+      echo "  export FRED_API_KEY=\"$key\""
+    fi
+    ;;
+  2)
+    env_file="$(pwd)/.env"
+    if [[ -f "$env_file" ]] && grep -q "^FRED_API_KEY=" "$env_file"; then
+      sed -i '' "s/^FRED_API_KEY=.*/FRED_API_KEY=\"$key\"/" "$env_file"
+      echo "Updated FRED_API_KEY in $env_file"
+    else
+      echo "FRED_API_KEY=\"$key\"" >> "$env_file"
+      echo "Added FRED_API_KEY to $env_file"
+    fi
+    echo "Note: make sure .env is in your .gitignore."
+    ;;
+  3)
+    read -rp "Enter file path: " custom_path
+    custom_path="${custom_path/#\~/$HOME}"
+    echo "export FRED_API_KEY=\"$key\"" >> "$custom_path"
+    echo "Added to $custom_path"
+    ;;
+  4)
+    echo "Key exported for current session only. It will be lost when the shell exits."
+    ;;
+  *)
+    echo "Invalid choice. Key exported for current session only."
+    ;;
+esac
 
 echo ""
 echo "Setup complete. All macro-econ-data endpoints are now available."

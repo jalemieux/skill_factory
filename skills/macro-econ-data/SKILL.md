@@ -21,10 +21,8 @@ Fetches current and historical US macroeconomic indicators from free public APIs
 
 **Prerequisites:** For PCE data, a FRED API key is needed. All other endpoints require no key.
 
-**Setup:** Run the setup script to get and configure your FRED API key:
-```bash
-bash scripts/setup-fred-key.sh
-```
+**Setup:** If `FRED_API_KEY` is not set, run `scripts/setup-fred-key.sh` from this skill's directory. Resolve the path relative to where this skill is installed (e.g., `bash ~/.claude/skills/macro-econ-data/scripts/setup-fred-key.sh` or `bash ./skills/macro-econ-data/scripts/setup-fred-key.sh`).
+
 The script walks you through: sign up → paste key → validate → persist to shell config. If `FRED_API_KEY` is already set, it confirms it's working.
 
 ## Usage
