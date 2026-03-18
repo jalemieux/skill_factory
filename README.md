@@ -1,22 +1,25 @@
-# write-skill
+# curunir-skills
 
-A skill that teaches AI coding agents to create new skills.
+Skills for the [curunir](../curunir/) agent project.
 
-Give it a description of what you want ("build a skill for managing GitHub issues with the gh CLI") and it walks the agent through requirements gathering, doc research, SKILL.md generation, and smoke testing — producing a ready-to-use skill.
+## Skills
 
-## Inspired by
+### write-skill
 
-- [Thariq's "Lessons from Building Claude Code: How We Use Skills"](https://x.com/trq212/status/2033949937936085378) — the nine skill categories, writing descriptions for models, building gotcha sections, and the principle that skills should provide pre-written code the agent adapts rather than reconstructs.
-- [Andrew Ng's Context Hub](https://x.com/AndrewYNg/status/2033577583200354812) — the idea that agents should pull curated API docs on demand rather than hallucinating APIs. The skill integrates context hub search as a research step when available.
-
-## Structure
+Teaches AI coding agents to create new skills. Give it a description of what you want ("build a skill for managing GitHub issues with the gh CLI") and it walks the agent through requirements gathering, doc research, SKILL.md generation, and smoke testing.
 
 ```
 skills/write-skill/
 ├── SKILL.md                    # The skill itself
 └── references/
-    └── template.md             # SKILL.md template + category heuristic table
+    ├── template.md             # SKILL.md template + category heuristic table
+    └── chub.md                 # Context Hub CLI reference (search → get → annotate)
 ```
+
+## Inspired by
+
+- [Thariq's "Lessons from Building Claude Code: How We Use Skills"](https://x.com/trq212/status/2033949937936085378) — the nine skill categories, writing descriptions for models, building gotcha sections, and the principle that skills should provide pre-written code the agent adapts rather than reconstructs.
+- [Andrew Ng's Context Hub](https://x.com/AndrewYNg/status/2033577583200354812) — the idea that agents should pull curated API docs on demand rather than hallucinating APIs. Integrated as a reference doc for the research phase (`references/chub.md`).
 
 ## Usage
 

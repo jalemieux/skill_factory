@@ -19,9 +19,9 @@ Create a new skill from scratch. Walks you through: requirements → research �
 
 ### Phase 2 — Research
 
-Research priority: user-provided docs > context hub (e.g., `chub search`, if available) > web search > agent knowledge.
+Research priority: user-provided docs > context hub (`chub`) > web search > agent knowledge.
 
-6. Gather docs using the priority order above. Do not install tools that aren't available.
+6. Gather docs using the priority order above. If `chub` is available (`which chub`), use it — see `references/chub.md` for the search → get → annotate workflow. Do not install tools that aren't available.
 7. Read 1-2 existing skills from the project's skills directory as style reference. If none exist, use the template as sole reference.
 
 ### Phase 3 — Generate
