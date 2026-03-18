@@ -28,16 +28,17 @@ Research priority: user-provided docs > context hub (`chub`) > web search > agen
 
 8. **Conflict check** — verify `{skills_dir}/{skill-name}/` doesn't already exist. If it does, ask the user whether to overwrite or choose a different name.
 9. Assess whether the skill needs supporting files (see Directory Structure below).
-10. Generate SKILL.md using the template. Read `references/template.md` for the full template and category heuristic.
-11. Generate any supporting files (scripts, references, templates, examples).
-12. Write to `{skills_dir}/{skill-name}/`.
+10. **Credential check** — if the skill uses APIs that require keys or tokens, generate an interactive setup script in `scripts/` that helps the user obtain and configure them. The script should: check if already set, tell the user where to sign up, prompt for the key, validate it against the API, and offer to persist it to the user's shell config. Reference the script from SKILL.md's prerequisites.
+11. Generate SKILL.md using the template. Read `references/template.md` for the full template and category heuristic.
+12. Generate any supporting files (scripts, references, templates, examples).
+13. Write to `{skills_dir}/{skill-name}/`.
 
 ### Phase 4 — Smoke Test
 
-13. **Structural validation** — frontmatter parses correctly, `name` and `description` present, file at correct path.
-14. **Load test** — use the skill loading tool available in your environment to load the new skill by name. Verify it returns the skill content, not a "not found" error.
-15. **Dry-run against success criteria** — walk through the skill's instructions for the test scenario. Execute read-only steps. For skills that call external APIs, compose the commands but do not execute them. Stop before any mutating side effects.
-16. Report pass/fail. If fail, fix and re-test.
+14. **Structural validation** — frontmatter parses correctly, `name` and `description` present, file at correct path.
+15. **Load test** — use the skill loading tool available in your environment to load the new skill by name. Verify it returns the skill content, not a "not found" error.
+16. **Dry-run against success criteria** — walk through the skill's instructions for the test scenario. Execute read-only steps. For skills that call external APIs, compose the commands but do not execute them. Stop before any mutating side effects.
+17. Report pass/fail. If fail, fix and re-test.
 
 ## Template & Category Heuristic
 
