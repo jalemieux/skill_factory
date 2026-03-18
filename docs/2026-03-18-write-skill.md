@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-03-18-write-skill-design.md`
 
-**Style references:** Existing skills at `../curunir/skills/` (web-search ~400 words, deep-research ~450 words) for length/density calibration. These are read-only references — output goes to `skills/write-skill/` in this workspace.
+**Style references:** Existing skills in the skills directory (web-search ~400 words, deep-research ~450 words) for length/density calibration. Output goes to `skills/write-skill/` in this workspace.
 
 ---
 

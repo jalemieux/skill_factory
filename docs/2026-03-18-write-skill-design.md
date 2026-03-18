@@ -1,15 +1,15 @@
 # Design: write-skill
 
-A curunir skill that teaches the agent to create new skills.
+A skill_factory skill that teaches the agent to create new skills.
 
 ## Identity
 
 ```yaml
 name: write-skill
-description: "Create a new curunir skill — gathers requirements, finds docs, generates SKILL.md, and smoke tests it"
+description: "Create a new skill — gathers requirements, finds docs, generates SKILL.md, and smoke tests it"
 ```
 
-Loaded when the agent is asked to create, write, or build a new skill for curunir.
+Loaded when the agent is asked to create, write, or build a new skill.
 
 ## Output
 

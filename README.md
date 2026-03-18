@@ -1,6 +1,6 @@
-# curunir-skills
+# skill_factory
 
-Skills for the [curunir](../curunir/) agent project.
+A project for building and managing AI agent skills.
 
 ## Skills
 
