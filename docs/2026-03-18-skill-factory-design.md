@@ -1,11 +1,11 @@
-# Design: write-skill
+# Design: skill-factory
 
 A skill_factory skill that teaches the agent to create new skills.
 
 ## Identity
 
 ```yaml
-name: write-skill
+name: skill-factory
 description: "Create a new skill — gathers requirements, finds docs, generates SKILL.md, and smoke tests it"
 ```
 
@@ -140,7 +140,7 @@ skills/{skill-name}/
 
 SKILL.md references supporting files explicitly (e.g., "Read `references/api-params.md` for the full parameter table"). The agent discovers supporting files through SKILL.md, not by scanning the directory.
 
-The `write-skill` agent decides during generation whether supporting files are needed based on complexity. Simple API wrappers → SKILL.md only. Complex workflows → multi-file.
+The `skill-factory` agent decides during generation whether supporting files are needed based on complexity. Simple API wrappers → SKILL.md only. Complex workflows → multi-file.
 
 ## Category Heuristic
 

@@ -1,9 +1,9 @@
 ---
-name: write-skill
+name: skill-factory
 description: "Use when asked to create, write, or build a new skill — gathers requirements, finds docs, generates SKILL.md, and smoke tests it"
 ---
 
-# Write Skill
+# Skill Factory
 
 Create a new skill from scratch. Walks you through: requirements → research → generate → smoke test.
 

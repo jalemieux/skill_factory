@@ -1,29 +1,34 @@
 # skill_factory
 
-A project for building and managing AI agent skills.
+A project for building and managing AI agent skills. Born from the need to reliably add skills to [curunir](https://github.com/jalemieux/curunir). Inspired by [Thariq's talk on how Claude Code uses skills](https://x.com/trq212/status/2033949937936085378) (category-driven templates, descriptions written for models, pre-written code over reconstruction) and [Andrew Ng's Context Hub](https://x.com/AndrewYNg/status/2033577583200354812) (agents pull curated API docs on demand instead of hallucinating). Uses [chub](https://github.com/context-hub/generator) during the research phase to search for and fetch curated API docs before falling back to web search.
 
 ## Skills
 
-### write-skill
+### skill-factory
 
 Teaches AI coding agents to create new skills. Give it a description of what you want ("build a skill for managing GitHub issues with the gh CLI") and it walks the agent through requirements gathering, doc research, SKILL.md generation, and smoke testing.
 
 ```
-skills/write-skill/
+skills/skill-factory/
 ├── SKILL.md                    # The skill itself
 └── references/
     ├── template.md             # SKILL.md template + category heuristic table
     └── chub.md                 # Context Hub CLI reference (search → get → annotate)
 ```
 
-## Inspired by
+### macro-econ-data
 
-- [Thariq's "Lessons from Building Claude Code: How We Use Skills"](https://x.com/trq212/status/2033949937936085378) — the nine skill categories, writing descriptions for models, building gotcha sections, and the principle that skills should provide pre-written code the agent adapts rather than reconstructs.
-- [Andrew Ng's Context Hub](https://x.com/AndrewYNg/status/2033577583200354812) — the idea that agents should pull curated API docs on demand rather than hallucinating APIs. Integrated as a reference doc for the research phase (`references/chub.md`).
+Fetches and analyzes macroeconomic data — treasury rates, CPI, PCE, commodity prices (gold, silver, oil), and US market indices (S&P 500).
+
+```
+skills/macro-econ-data/
+├── SKILL.md                    # The skill itself
+└── scripts/                    # Setup and credential scripts
+```
 
 ## Usage
 
-Load the `write-skill` skill in your agent environment, then ask it to create a skill:
+Load the `skill-factory` skill in your agent environment, then ask it to create a skill:
 
 > "Create a skill called `github-issues` that teaches the agent to manage GitHub issues using the `gh` CLI."
 

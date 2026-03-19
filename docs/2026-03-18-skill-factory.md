@@ -1,4 +1,4 @@
-# write-skill Implementation Plan
+# skill-factory Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,32 +8,32 @@
 
 **Tech Stack:** Markdown (SKILL.md with YAML frontmatter)
 
-**Spec:** `docs/superpowers/specs/2026-03-18-write-skill-design.md`
+**Spec:** `docs/2026-03-18-skill-factory-design.md`
 
-**Style references:** Existing skills in the skills directory (web-search ~400 words, deep-research ~450 words) for length/density calibration. Output goes to `skills/write-skill/` in this workspace.
+**Style references:** Existing skills in the skills directory (web-search ~400 words, deep-research ~450 words) for length/density calibration. Output goes to `skills/skill-factory/` in this workspace.
 
 ---
 
 ### Task 1: Write SKILL.md
 
 **Files:**
-- Create: `skills/write-skill/SKILL.md`
+- Create: `skills/skill-factory/SKILL.md`
 
 - [ ] **Step 1: Create skill directory**
 
 ```bash
-mkdir -p skills/write-skill
+mkdir -p skills/skill-factory
 ```
 
 - [ ] **Step 2: Write SKILL.md with frontmatter and all sections**
 
-Write `skills/write-skill/SKILL.md` with the following structure. Content is derived from the design spec, generalized to remove framework-specific references.
+Write `skills/skill-factory/SKILL.md` with the following structure. Content is derived from the design spec, generalized to remove framework-specific references.
 
 **Frontmatter:**
 
 ```yaml
 ---
-name: write-skill
+name: skill-factory
 description: "Use when asked to create, write, or build a new skill — gathers requirements, finds docs, generates SKILL.md, and smoke tests it"
 ---
 ```
@@ -74,15 +74,15 @@ description: "Use when asked to create, write, or build a new skill — gathers 
 - [ ] **Step 3: Verify frontmatter parses correctly**
 
 ```bash
-head -5 skills/write-skill/SKILL.md
+head -5 skills/skill-factory/SKILL.md
 ```
 
-Verify: first line is `---`, `name: write-skill` present, `description:` present, closing `---` present.
+Verify: first line is `---`, `name: skill-factory` present, `description:` present, closing `---` present.
 
 - [ ] **Step 4: Check word count and density**
 
 ```bash
-wc -w skills/write-skill/SKILL.md
+wc -w skills/skill-factory/SKILL.md
 ```
 
 Target: 400-600 words. Calibrated against existing skills — web-search is ~400 words, deep-research is ~450 words. This skill is more complex (Runbook category) so up to 600 is acceptable. If over 600, trim — move large reference content to a supporting file.
@@ -90,8 +90,8 @@ Target: 400-600 words. Calibrated against existing skills — web-search is ~400
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/write-skill/SKILL.md
-git commit -m "feat: add write-skill — teaches agent to create new skills"
+git add skills/skill-factory/SKILL.md
+git commit -m "feat: add skill-factory — teaches agent to create new skills"
 ```
 
 ---
@@ -100,7 +100,7 @@ git commit -m "feat: add write-skill — teaches agent to create new skills"
 
 - [ ] **Step 1: Structural validation**
 
-Read `skills/write-skill/SKILL.md` and verify:
+Read `skills/skill-factory/SKILL.md` and verify:
 - YAML frontmatter has `name` and `description`
 - `name` is lowercase-kebab-case, letters/numbers/hyphens only
 - `description` starts with "Use when" and describes trigger condition
@@ -108,7 +108,7 @@ Read `skills/write-skill/SKILL.md` and verify:
 
 - [ ] **Step 2: Load test**
 
-If a skill loading tool is available in the environment, load `write-skill` by name and verify it returns the SKILL.md content (not a "skill not found" error). If no loading tool is available, verify the file exists at the expected path and frontmatter is parseable.
+If a skill loading tool is available in the environment, load `skill-factory` by name and verify it returns the SKILL.md content (not a "skill not found" error). If no loading tool is available, verify the file exists at the expected path and frontmatter is parseable.
 
 - [ ] **Step 3: Dry-run against test scenario**
 
@@ -126,7 +126,7 @@ If any phase is unclear or missing guidance, fix and re-verify.
 
 ```bash
 git add -u
-git commit -m "fix: address smoke test findings in write-skill"
+git commit -m "fix: address smoke test findings in skill-factory"
 ```
 
 Only run if changes were needed.
