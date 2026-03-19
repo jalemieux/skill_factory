@@ -16,16 +16,6 @@ skills/skill-factory/
     └── chub.md                 # Context Hub CLI reference (search → get → annotate)
 ```
 
-### macro-econ-data
-
-Fetches and analyzes macroeconomic data — treasury rates, CPI, PCE, commodity prices (gold, silver, oil), and US market indices (S&P 500).
-
-```
-skills/macro-econ-data/
-├── SKILL.md                    # The skill itself
-└── scripts/                    # Setup and credential scripts
-```
-
 ## Usage
 
 Load the `skill-factory` skill in your agent environment, then ask it to create a skill:
