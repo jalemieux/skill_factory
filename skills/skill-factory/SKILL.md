@@ -7,6 +7,9 @@ description: "Use when asked to create, write, or build a new skill — gathers 
 
 Create a new skill from scratch. Walks you through: requirements → research → generate → smoke test.
 
+**CLI dependencies (available in Docker container):**
+- `chub` — Context Hub CLI for fetching curated API docs. Optional; skill falls back to web search if unavailable.
+
 ## Workflow
 
 ### Phase 1 — Requirements
