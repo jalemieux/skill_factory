@@ -31,3 +31,7 @@ The agent will:
 2. Research docs (context hub, web search, or user-provided)
 3. Generate SKILL.md with the right emphasis for the category
 4. Smoke test: validate structure, load test, dry-run against a test scenario
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
