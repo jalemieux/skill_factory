@@ -16,6 +16,10 @@ skills/skill-factory/
     └── chub.md                 # Context Hub CLI reference (search → get → annotate)
 ```
 
+## Workflows
+
+The skill-factory skill has been automated into a full contribution workflow via [git-contribute](examples/git-contribute/SKILL.md) — an autonomous issue-to-merge lifecycle that picks up GitHub issues, plans implementations via draft PRs, and shepherds them through code review. Run it on a loop to continuously pick up work from a project's issue tracker.
+
 ## Usage
 
 Load the `skill-factory` skill in your agent environment, then ask it to create a skill:
