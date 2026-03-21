@@ -9,6 +9,7 @@ Generate this structure. Scale each section to the skill's complexity.
 name: {skill-name}
 description: "{trigger condition — when should the agent load this? Describe WHEN, not WHAT}"
 tools: {optional — comma-separated opt-in tools, only if genuinely needed}
+dependencies: {optional — list of CLI tools the skill requires, e.g. [gh, jq]}
 ---
 
 # {Skill Title}
@@ -44,6 +45,29 @@ Skip anything the agent would already do.}
 - Why it goes wrong
 - What to do instead}
 ```
+
+## Dependencies Field
+
+The optional `dependencies` frontmatter field declares CLI tools the skill needs. The installation workflow (see `references/installation.md`) uses this to install missing tools.
+
+**Simple — CLI tools only:**
+
+```yaml
+dependencies: [gh, jq]
+```
+
+**Complex dependencies** (MCP servers, version constraints, tools needing special install instructions) go in a `## Dependencies` body section instead of frontmatter:
+
+```markdown
+## Dependencies
+
+- `gh` — GitHub CLI
+- `@anthropic-ai/mcp-server-slack` — MCP server, run via `npx`
+  - scope: project
+  - env: { SLACK_BOT_TOKEN: "...", SLACK_TEAM_ID: "..." }
+```
+
+Use frontmatter for simple CLI deps, body section for complex cases. Both can coexist — frontmatter for quick tools, body section for detailed setup.
 
 ## Category Heuristic
 

@@ -6,13 +6,14 @@ A project for building and managing AI agent skills. Born from the need to relia
 
 ### skill-factory
 
-Teaches AI coding agents to create new skills. Give it a description of what you want ("build a skill for managing GitHub issues with the gh CLI") and it walks the agent through requirements gathering, doc research, SKILL.md generation, and smoke testing.
+Teaches AI coding agents to create new skills. Give it a description of what you want ("build a skill for managing GitHub issues with the gh CLI") and it walks the agent through requirements gathering, dependency installation, doc research, SKILL.md generation, and smoke testing. Handles installing CLI tools, npm packages, MCP servers, and Python packages — with support for containerized environments.
 
 ```
 skills/skill-factory/
 ├── SKILL.md                    # The skill itself
 └── references/
     ├── template.md             # SKILL.md template + category heuristic table
+    ├── installation.md         # Dependency installation workflow
     └── chub.md                 # Context Hub CLI reference (search → get → annotate)
 ```
 

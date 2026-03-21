@@ -23,30 +23,31 @@ Create a new skill from scratch. Walks you through: requirements → research �
    - **User-global** (`~/.claude/skills/`) — available across all projects for this user.
    - **Custom path** — user specifies.
    Use the chosen path as `{skills_dir}` for the rest of the workflow.
-6. Propose a **success criteria / test scenario** the skill can be verified against. User can override.
+6. **Dependency installation** — if the skill declares dependencies (frontmatter `dependencies` field or a `## Dependencies` body section), install them now. Read `references/installation.md` for the full workflow: detect environment, detect package manager, install by type (CLI tools, npm packages, MCP servers, Python packages), validate. If the skill has no dependencies, skip this step.
+7. Propose a **success criteria / test scenario** the skill can be verified against. User can override.
 
 ### Phase 2 — Research
 
 Research priority: user-provided docs > context hub (`chub`) > web search > agent knowledge.
 
-7. Gather docs using the priority order above. If `chub` is available (`which chub`), use it — see `references/chub.md` for the search → get → annotate workflow. Do not install tools that aren't available.
-8. Read 1-2 existing skills from the project's skills directory as style reference. If none exist, use the template as sole reference.
+8. Gather docs using the priority order above. If `chub` is available (`which chub`), use it — see `references/chub.md` for the search → get → annotate workflow. Do not install tools that aren't available.
+9. Read 1-2 existing skills from the project's skills directory as style reference. If none exist, use the template as sole reference.
 
 ### Phase 3 — Generate
 
-9. **Conflict check** — verify `{skills_dir}/{skill-name}/` doesn't already exist. If it does, ask the user whether to overwrite or choose a different name.
-10. Assess whether the skill needs supporting files (see Directory Structure below).
-11. **Credential check** — if the skill uses APIs that require keys or tokens, generate an interactive setup script in `scripts/` that helps the user obtain and configure them. The script should: check if already set, tell the user where to sign up, prompt for the key, validate it against the API, and offer a choice of where to persist it (shell config, project `.env`, custom path, or session-only). Reference the script from SKILL.md's prerequisites.
-12. Generate SKILL.md using the template. Read `references/template.md` for the full template and category heuristic.
-13. Generate any supporting files (scripts, references, templates, examples).
-14. Write to `{skills_dir}/{skill-name}/`.
+10. **Conflict check** — verify `{skills_dir}/{skill-name}/` doesn't already exist. If it does, ask the user whether to overwrite or choose a different name.
+11. Assess whether the skill needs supporting files (see Directory Structure below).
+12. **Credential check** — if the skill uses APIs that require keys or tokens, generate an interactive setup script in `scripts/` that helps the user obtain and configure them. The script should: check if already set, tell the user where to sign up, prompt for the key, validate it against the API, and offer a choice of where to persist it (shell config, project `.env`, custom path, or session-only). Reference the script from SKILL.md's prerequisites.
+13. Generate SKILL.md using the template. Read `references/template.md` for the full template and category heuristic.
+14. Generate any supporting files (scripts, references, templates, examples).
+15. Write to `{skills_dir}/{skill-name}/`.
 
 ### Phase 4 — Smoke Test
 
-15. **Structural validation** — frontmatter parses correctly, `name` and `description` present, file at correct path.
-16. **Load test** — use the skill loading tool available in your environment to load the new skill by name. Verify it returns the skill content, not a "not found" error.
-17. **Dry-run against success criteria** — walk through the skill's instructions for the test scenario. Execute read-only steps. For skills that call external APIs, compose the commands but do not execute them. Stop before any mutating side effects.
-18. Report pass/fail. If fail, fix and re-test.
+16. **Structural validation** — frontmatter parses correctly, `name` and `description` present, file at correct path.
+17. **Load test** — use the skill loading tool available in your environment to load the new skill by name. Verify it returns the skill content, not a "not found" error.
+18. **Dry-run against success criteria** — walk through the skill's instructions for the test scenario. Execute read-only steps. For skills that call external APIs, compose the commands but do not execute them. Stop before any mutating side effects.
+19. Report pass/fail. If fail, fix and re-test.
 
 ## Template & Category Heuristic
 
