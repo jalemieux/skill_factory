@@ -216,7 +216,37 @@ When `command` is not `npx`, omit the `-y` flag and use `args` as-is.
 
 **http servers:**
 
-Use the appropriate HTTP transport config format for the target config file.
+```json
+{
+  "mcpServers": {
+    "jina": {
+      "type": "http",
+      "url": "https://mcp.jina.ai/v1",
+      "headers": {
+        "Authorization": "Bearer ${JINA_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+The `type` field **must** be `"http"` — not `"url"`, not `"https"`, not `"web"`. This is the only valid value for HTTP transport servers.
+
+**Preferred: use `claude mcp add` CLI** — this avoids config format errors entirely:
+
+```bash
+# stdio server
+claude mcp add gemini --scope user \
+  --env GEMINI_API_KEY=YOUR_KEY \
+  -- npx -y @anthropic-ai/rlabs-gemini-mcp
+
+# http server
+claude mcp add jina --transport http --scope user \
+  --header "Authorization: Bearer YOUR_KEY" \
+  https://mcp.jina.ai/v1
+```
+
+When the CLI is available, prefer it over manual JSON editing. Fall back to manual config only when the CLI is unavailable (e.g., container environments or non-Claude-Code hosts).
 
 **Config file locations:**
 
@@ -286,6 +316,7 @@ Report results per dependency: installed (with version), failed (with error), or
 
 - **Forgetting PATH after install** — tools installed via `npm install -g` or `pipx` may not be on PATH in the current shell. Suggest `export PATH` or shell restart if `which` fails after install.
 - **Running apt without update** — always `apt-get update` before `apt-get install` in containers. Stale package lists cause "package not found" errors.
+- **Wrong `type` for HTTP transport** — the only valid value is `"type": "http"`. Common hallucinations: `"url"`, `"https"`, `"web"`. When in doubt, use `claude mcp add --transport http` instead of manual config.
 - **Hardcoding secrets in MCP config** — use `${ENV_VAR}` references, not literal tokens. Secrets belong in the environment, not in config files.
 - **Overwriting existing MCP config** — always read and merge, never overwrite. Users may have other servers configured.
 - **Missing base image packages** — Alpine images lack many tools by default. `curl`, `git`, and `bash` often need explicit installation.
