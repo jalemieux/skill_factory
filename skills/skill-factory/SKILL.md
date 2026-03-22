@@ -23,7 +23,7 @@ Create a new skill from scratch. Walks you through: requirements → research �
    - **User-global** (`~/.claude/skills/`) — available across all projects for this user.
    - **Custom path** — user specifies.
    Use the chosen path as `{skills_dir}` for the rest of the workflow.
-6. **Dependency installation** — if the skill declares dependencies (frontmatter `dependencies` field or a `## Dependencies` body section), install them now. Read `references/installation.md` for the full workflow: detect environment, detect package manager, install by type (CLI tools, npm packages, MCP servers, Python packages), validate. If the skill has no dependencies, skip this step.
+6. **Dependency installation** — if the skill has a `manifest.yaml`, install its dependencies now. Read `references/installation.md` for the manifest schema and full workflow: detect environment, detect package manager, install by type (CLI tools, npm packages, MCP servers, Python packages), set up secrets, validate. If the skill has no manifest.yaml, skip this step.
 7. Propose a **success criteria / test scenario** the skill can be verified against. User can override.
 
 ### Phase 2 — Research
@@ -37,7 +37,7 @@ Research priority: user-provided docs > context hub (`chub`) > web search > agen
 
 10. **Conflict check** — verify `{skills_dir}/{skill-name}/` doesn't already exist. If it does, ask the user whether to overwrite or choose a different name.
 11. Assess whether the skill needs supporting files (see Directory Structure below).
-12. **Credential check** — if the skill uses APIs that require keys or tokens, generate an interactive setup script in `scripts/` that helps the user obtain and configure them. The script should: check if already set, tell the user where to sign up, prompt for the key, validate it against the API, and offer a choice of where to persist it (shell config, project `.env`, custom path, or session-only). Reference the script from SKILL.md's prerequisites.
+12. **Dependency manifest** — if the skill needs external dependencies (CLI tools, npm packages, MCP servers, API keys), generate a `manifest.yaml` alongside SKILL.md. Read `references/installation.md` for the schema. Do not put dependency declarations in SKILL.md — that file is loaded into the agent's runtime prompt on every invocation. Keep installation-time metadata in the manifest.
 13. Generate SKILL.md using the template. Read `references/template.md` for the full template and category heuristic.
 14. Generate any supporting files (scripts, references, templates, examples).
 15. Write to `{skills_dir}/{skill-name}/`.
