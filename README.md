@@ -2,6 +2,24 @@
 
 A project for building and managing AI agent skills. Born from the need to reliably add skills to [curunir](https://github.com/jalemieux/curunir). Inspired by [Thariq's talk on how Claude Code uses skills](https://x.com/trq212/status/2033949937936085378) (category-driven templates, descriptions written for models, pre-written code over reconstruction) and [Andrew Ng's Context Hub](https://x.com/AndrewYNg/status/2033577583200354812) (agents pull curated API docs on demand instead of hallucinating). Uses [chub](https://github.com/context-hub/generator) during the research phase to search for and fetch curated API docs before falling back to web search.
 
+## Manifest Schema
+
+Skills declare dependencies in a `manifest.yaml` file alongside SKILL.md. All sections are optional.
+
+```yaml
+name: skill-name                    # must match SKILL.md frontmatter name
+cli: [gh, jq]                       # CLI tools — checked via `which`, installed via system pkg manager
+tools: [web_fetch]                   # LLM tools — must be in the agent's tool context at runtime
+skills: [web-search]                 # other skills this skill depends on
+npm: ["@some/package"]               # npm packages — installed globally
+npx: ["@some/other-package"]         # npm packages run via npx — no global install needed
+pip: [some-package]                  # Python packages — installed via pipx (preferred) or pip
+mcp: [...]                           # MCP servers — see installation.md for full schema
+secrets: [...]                       # API keys / env vars — see installation.md for full schema
+```
+
+The `tools` field declares LLM runtime tools the skill expects the host agent to provide (e.g., `web_fetch` in curunir, `WebFetch` in Claude Code). These are validated at install time but not installed — the host platform must already provide them.
+
 ## Skills
 
 ### skill-factory
@@ -13,7 +31,7 @@ skills/skill-factory/
 ├── SKILL.md                    # The skill itself
 └── references/
     ├── template.md             # SKILL.md template + category heuristic table
-    ├── installation.md         # Dependency installation workflow
+    ├── installation.md         # Dependency installation workflow + manifest schema
     └── chub.md                 # Context Hub CLI reference (search → get → annotate)
 ```
 

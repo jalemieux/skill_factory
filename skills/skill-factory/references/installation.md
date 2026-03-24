@@ -13,6 +13,8 @@ name: skill-name                    # must match SKILL.md frontmatter name
 
 cli: [gh, jq]                       # CLI tools — checked via `which`, installed via system pkg manager
 
+tools: [web_fetch]                   # LLM tools — must be in the agent's tool context at runtime
+
 npm:                                 # npm packages — installed globally
   - "@some/package"
 
@@ -55,6 +57,16 @@ Version constraints can be embedded inline using native syntax: `"@some/package@
 MCP server packages listed in the `mcp` section do not need to also appear in `npx` — the installer handles npx availability as part of MCP server setup.
 
 ### Field Reference
+
+**tools — LLM runtime tools:**
+
+Tools the skill expects the host LLM agent to provide at runtime. These are not installed — they must already be registered in the agent's tool context (e.g., `web_fetch` in curunir, `WebFetch` in Claude Code). The installer validates their presence but does not install them.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `tools` | list of strings | Tool names the skill depends on at runtime |
+
+During installation (Step 5), verify each tool is available in the agent's tool list. If a required tool is missing, warn the user — the skill will not function correctly without it.
 
 **MCP entry fields:**
 
@@ -128,7 +140,11 @@ Let the user override the detected package manager if needed.
 
 ### Step 5 — Install dependencies by type
 
-Process manifest sections in order: `cli` → `npm` → `npx` → `pip` → `secrets` → `mcp`.
+Process manifest sections in order: `tools` → `cli` → `npm` → `npx` → `pip` → `secrets` → `mcp`.
+
+#### LLM tools (runtime validation)
+
+For each tool in the `tools` list, verify it exists in the host agent's tool context. These are not installable — if missing, warn the user that the skill requires this tool and will not function without it. Common examples: `web_fetch` (clean text extraction from URLs), `web_search` (search engine queries).
 
 Secrets are processed before MCP so that environment variables are available when MCP config is written.
 
